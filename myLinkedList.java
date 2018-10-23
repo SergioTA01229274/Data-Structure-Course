@@ -16,7 +16,11 @@ public class myLinkedList <E>{
 	public myLinkedList(E[] datos) {
 		this();
 		for(int i = 0; i < datos.length;i++) {
-			this.insertAt(i, datos[i]);
+			if(i < datos.length) {
+				this.insertatTail(datos[i]);
+			}else {
+				this.insertAt(i, datos[i]);
+			}
 		}
 	}
 	public E head() throws NoSuchElementException {  // Metdodo para conocer el head de la lista enlazada
@@ -184,7 +188,7 @@ public class myLinkedList <E>{
 			if(this.size == 1) {
 				return this.head.getData() + "";
 			}
-			while(current.getRefNext() != null) {
+			while(current != null) {
 				res += current.getData() + ", ";
 				current = current.getRefNext();
 			}
@@ -196,11 +200,9 @@ public class myLinkedList <E>{
 		
 	}
 	public static void main(String[] args) {
-		Integer[] nums = {1,2,3,4,5,6};
+		Integer[] nums = {1};
 		myLinkedList n2 = new myLinkedList(nums);
-		System.out.println(n2.tail());
-		System.out.println(n2.getAt(4));
-		System.out.println(n2);
+		
 	}
 }
 

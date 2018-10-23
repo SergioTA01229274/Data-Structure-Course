@@ -55,6 +55,7 @@ public class MyQueue <E>{
 		nombres.enqueue("Alex");
 		nombres.enqueue("Daniel");
 		
+		System.out.println(nombres);
 		while(!nombres.isEmpty()) {
 			System.out.println(nombres.dequeue());
 		}
