@@ -47,9 +47,11 @@ public class MyStack <E>{
 	
 	public static void main(String[] args) {
 		MyStack<String> prueba = new MyStack();
-		prueba.push("Serigo");
+		prueba.push("Sergio");
 		prueba.push("Daniel");
 		prueba.push("Gus");
+		prueba.push("Lalo");
+		prueba.push("Jesus");
 		
 		while(!prueba.isEmpty()) {
 			System.out.println(prueba.pop());

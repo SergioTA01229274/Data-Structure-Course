@@ -8,7 +8,8 @@ public class myLinkedList <E>{
 	private Node<E> head, tail;
 	private int size;
 	
-	public myLinkedList (){ //Nuestro constructor por default crea una lista enlazada vacia.
+	public myLinkedList (){ 
+		//Nuestro constructor por default crea una lista enlazada vacia.
 		this.head = this.tail = null; //Por lo tanto, tanto head como tail son null. 
 		this.size = 0; // Y el tamaño de la lista es cero. 
 	}
@@ -16,14 +17,17 @@ public class myLinkedList <E>{
 	public myLinkedList(E[] datos) {
 		this();
 		for(int i = 0; i < datos.length;i++) {
+			this.insertatTail(datos[i]);
+			/*
 			if(i < datos.length) {
 				this.insertatTail(datos[i]);
 			}else {
 				this.insertAt(i, datos[i]);
-			}
+			}*/
 		}
 	}
-	public E head() throws NoSuchElementException {  // Metdodo para conocer el head de la lista enlazada
+	public E head() throws NoSuchElementException {  
+		// Metdodo para conocer el head de la lista enlazada
 		try {
 			return this.head.getData();
 		} catch (NullPointerException e) {
@@ -31,25 +35,28 @@ public class myLinkedList <E>{
 		}
 	}
 	public E tail() throws NoSuchElementException{
+		//Metodo para conocer la cola de la lista enlazada
 		try {
-			return this.tail.getData(); //Metodo para conocer la cola de la lista enlazada
+			return this.tail.getData();
 		} catch (NullPointerException e) {
 			throw new NoSuchElementException("You can´t access the last element of an emprty list");
 		}
 		
 	}
 	public int size() {
-		return this.size; //Metodo para conocer el tamaño de la lista enlazada
+		//Metodo para conocer el tamaño de la lista enlazada
+		return this.size;
 	}
-	public boolean isEmpty() { //Metodo que expresa si la lista enlazada tiene elementos o esta vacia
+	public boolean isEmpty() { 
+		//Metodo que expresa si la lista enlazada tiene elementos o esta vacia
 		if(this.size() == 0) {
 			return true;
 		}else {
 			return false;
 		}
 	}
-	public void insertAtFirst(E data) { //Metodo que permite ingresar un elemento al principio de la lista
-		
+	public void insertAtFirst(E data) { 
+		//Metodo que permite ingresar un elemento al principio de la lista
 		//Creamos un objeto Node, que tiene como referencia de siguiente al nodo 
 		//que esta como cabeza actual de la lista.
 		Node<E> elementAF = new Node<E>(data, this.head);
@@ -61,8 +68,9 @@ public class myLinkedList <E>{
 		if(this.size == 0) {
 			this.tail = this.head;
 		}
-		this.size++; //Aumentamos el tamaño de la lista para no perder nocion de la longitud en operaciones futuras
-	}
+		this.size++; 
+		//Aumentamos el tamaño de la lista para no perder nocion de la longitud en operaciones futuras
+		}
 	public void insertatTail(E data) {
 		if(this.size > 0) { //Primero nos aseguramos que la lista ya tenga elementos
 			Node<E> elementAT = new Node<E>(data); // Creamos el nuevo nodo que va a ser el nuevo tail, el ultimo elemento en la lista
@@ -70,7 +78,8 @@ public class myLinkedList <E>{
 			this.tail = elementAT; //Asignamos el atributo tail al nuevo objeto Node, ya que este será el ultimo objeto en la lista
 			this.size++; //Incrementamos el tamaño de la lista
 		}else {
-			this.insertAtFirst(data); //Si la lista estaba vacia, simplemente utilizamos el metodo que ya teniamos 
+			//Si la lista estaba vacia, simplemente utilizamos el metodo que ya teniamos 
+			this.insertAtFirst(data); 
 		}
 	}
 	public void insertAt(int pos, E data) throws IndexOutOfBoundsException{ 
@@ -100,7 +109,6 @@ public class myLinkedList <E>{
 			}else if(pos == this.size - 1) {
 				return this.removeLast();
 			}
-			
 			int cont = 0;
 			Node<E> current = this.head;
 			while(cont < pos - 1) {
@@ -189,10 +197,9 @@ public class myLinkedList <E>{
 				return this.head.getData() + "";
 			}
 			while(current != null) {
-				res += current.getData() + ", ";
+				res += current.getData() + ",";
 				current = current.getRefNext();
 			}
-			//res += this.tail();
 			return res;
 		}catch (NullPointerException e) {
 			return "";
@@ -200,18 +207,20 @@ public class myLinkedList <E>{
 		
 	}
 	public static void main(String[] args) {
-		Integer[] nums = {1};
+		Integer[] nums = {1,2,4,5,6,7,8,9};
 		myLinkedList n2 = new myLinkedList(nums);
-		
+		System.out.println(n2);
 	}
 }
 
 class Node <E>{
 	private E data;
-	private Node<E> refNext;  // El atributo objeto de tipo Node se refiere a la referencia del siguiente nodo en la lista enlazadaa
+	
+	// El atributo objeto de tipo Node se refiere a la referencia del siguiente nodo en la lista enlazadaa
+	private Node<E> refNext; 
 	
 	public Node(E data, Node<E> next) {
-//El objeto Node recibido se refiere a la referencia del nodo que le sigue a la instancia en cuestion 
+		//El objeto Node recibido se refiere a la referencia del nodo que le sigue a la instancia en cuestion 
 		this.data = data;
 		this.refNext = next;
 	}

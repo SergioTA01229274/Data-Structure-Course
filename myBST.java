@@ -118,30 +118,35 @@ public class myBST <E extends Comparable<E>>{
 			throw new NoSuchElementException("This value: " + data + " was not found in the BST.");
 		}else {
 			E res = current.getData();
-			//Caso nodo a borrar es una hoja 
+			//Caso: Nodo a borrar es un nodo hoja.
 			if(current.getLeft() == null && current.getRight() == null) {
 				if(current == this.root) {
 					this.root = null;
 				}
 				if(parent.getLeft() == current) {
 					parent.setLeft(null);
+					System.gc();
 				}else {
 					parent.setRight(null);
+					System.gc();
 				}
 				this.size--;
 			}
-			//Caso en que el padre solo tiene un hijo izquierdo
+			//Caso: El nodo a eliminar (current) solo tiene un hijo izquierdo
 			else if (current.getLeft() != null && current.getRight() == null) {
 				if(current == this.root) {
 					this.root = current.getLeft();
+					System.gc();
 				}else if(parent.getLeft() == current) {
 					parent.setLeft(current.getLeft());
+					System.gc();
 				}else {
 					parent.setRight(current.getLeft());
+					System.gc();
 				}
 				this.size--;
 			}
-			//Caso en que el padre solo tiene un hijo derecho
+			//Caso: El nodo a eliminar (current) solo tiene un hijo derecho
 			else if(current.getLeft() == null && current.getRight() != null) {
 				if(current == this.root) {
 					this.root = current.getRight();
@@ -152,9 +157,9 @@ public class myBST <E extends Comparable<E>>{
 				}
 				this.size--;
 			}else {
+				//Caso: El nodo a eliminar (current) tiene dos hijos, sera necesario otro nodo raiz para ese subarbol
 				NodeBST<E> pred = predecesor(current);
-				current.setData(delete(pred.getData()));
-				
+				current.setData(this.delete(pred.getData()));
 			}
 			return res;
 		}
